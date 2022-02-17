@@ -1,0 +1,9 @@
+{% extends "task/index.jinja" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+    <div>
+        something {{ tasks.count() }}
+    </div>
+{% endblock %}
