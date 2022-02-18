@@ -1,0 +1,25 @@
+{% extends "task/index.jinja" %}
+
+{% block title %}Task {{ task.id }}{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="container">
+        <div class="card border-info mb-3 col-11 col-sm-10 col-md-10 col-lg-10 col-xl-10" style="margin: 0 auto;">
+                <div class="card-header" style="font-size: 14pt;">{{ task.user.username }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ task.name }}</h5>
+                    <p class="card-text">{{ task.content }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-info">
+                    Состояние: {% if task.is_done %}сделано.{% else %}в процессе.{% endif %}
+                    {% if request.user == task.user and not task.is_done %}
+                        <button onclick="updateTask({{ task.user.id }})" class="btn btn-primary">
+                            Сделано
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+     </div>
+    <script src="{{ static("js/taskService.js") }}"></script>
+{% endblock %}

@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     'task'
 ]
 
@@ -42,7 +44,8 @@ TEMPLATES = [
         "OPTIONS": {
             "match_extension": ".jinja",
             "match_regex": None,
-            "app_dirname": "templates"
+            "app_dirname": "templates",
+            "environment": "task.jinja2.environment"
         }
     },
     {
@@ -100,5 +103,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,0 +1,11 @@
+{% extends "task/index.jinja" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+    <br><br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p() }}
+    </form>
+{% endblock %}

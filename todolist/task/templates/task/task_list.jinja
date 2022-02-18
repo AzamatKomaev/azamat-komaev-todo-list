@@ -3,7 +3,24 @@
 {% block title %}Tasks{% endblock %}
 
 {% block content %}
-    <div>
-        something {{ tasks.count() }}
+    <br><br>
+    <h3 style="text-align: center;">Всего: {{ tasks.count() }}</h3>
+    <br>
+    <div class="container">
+        {% for task in tasks %}
+            <div class="card border-info mb-3 col-11 col-sm-9 col-md-9 col-lg-9 col-xl-9 text-dark" style="margin: 0 auto;">
+                <div class="card-header" style="font-size: 14pt;">{{ task.user.username }}</div>
+                <div class="card-body">
+                    <a href="{{ url('task.detail', args=[task.id]) }}" class="text-dark">
+                        <h5 class="card-title">{{ task.name }}</h5>
+                        <p class="card-text">{{ task.content }}</p>
+                    </a>
+                </div>
+                <div class="card-footer bg-transparent border-info">
+                    Состояние: {% if task.is_done %}сделано.{% else %}в процессе.{% endif %}
+                </div>
+            </div>
+            <br>
+        {% endfor %}
     </div>
 {% endblock %}
