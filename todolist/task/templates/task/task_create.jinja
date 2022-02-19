@@ -4,8 +4,20 @@
 
 {% block content %}
     <br><br>
-    <form action="" method="POST">
+    <form action="" method="POST" class="container">
         {% csrf_token %}
-        {{ form.as_p() }}
+        <div class="mb-3">
+            <label for="task-name" class="form-label">Task name</label>
+            <input type="text" maxlength="100" class="form-control" name="name" id="task-name" placeholder="I wanna do it!!!">
+        </div>
+        <p class="text-danger">
+            {% if form.errors.name %}{{ form.errors.name }}{% endif %}
+        </p>
+        <br>
+        <div class="mb-3">
+            <label for="task-content" class="form-label">Task content</label>
+            <textarea class="form-control" id="task-content" rows="20" name="content"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Create</button>
     </form>
 {% endblock %}

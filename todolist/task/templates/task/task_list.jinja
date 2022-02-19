@@ -7,20 +7,62 @@
     <h3 style="text-align: center;">Всего: {{ tasks.count() }}</h3>
     <br>
     <div class="container">
-        {% for task in tasks %}
-            <div class="card border-info mb-3 col-11 col-sm-9 col-md-9 col-lg-9 col-xl-9 text-dark" style="margin: 0 auto;">
-                <div class="card-header" style="font-size: 14pt;">{{ task.user.username }}</div>
-                <div class="card-body">
-                    <a href="{{ url('task.detail', args=[task.id]) }}" class="text-dark">
-                        <h5 class="card-title">{{ task.name }}</h5>
-                        <p class="card-text">{{ task.content }}</p>
+        <div class="mb-3 col-11 col-sm-9 col-md-9 col-lg-9 col-xl-9" style="margin: 0 auto;">
+            <div class="btn-group">
+                <a
+                        href="{{ url ('task.list') }}?sort_type=created_at"
+                        class="btn btn-primary"
+                        aria-current="page"
+                >
+                    By creating
+                </a>
+
+                <a
+                        href="{{ url ('task.list') }}?sort_type=updated_at"
+                        class="btn btn-primary"
+                >
+                    By updating
+                </a>
+
+                <a
+                        href="{{ url ('task.list') }}?sort_type=only_done"
+                        class="btn btn-primary"
+                >
+                    Only done
+                </a>
+
+                <a
+                        href="{{ url ('task.list') }}?sort_type=only_in_progress"
+                        class="btn btn-primary"
+                >
+                    Only in progress
+                </a>
+                {% if request.user.is_authenticated %}
+                    <a
+                            href="{{ url ('task.list') }}?sort_type=filter_by_user&user_username={{ request.user.username }}"
+                            class="btn btn-primary"
+                    >
+                        Mine
                     </a>
-                </div>
-                <div class="card-footer bg-transparent border-info">
-                    Состояние: {% if task.is_done %}сделано.{% else %}в процессе.{% endif %}
-                </div>
+                {% endif %}
             </div>
-            <br>
-        {% endfor %}
+            <br><br>
+
+            {% for task in tasks %}
+                <div class="card border-info text-dark">
+                    <div class="card-header" style="font-size: 14pt;">{{ task.user.username }}</div>
+                    <div class="card-body">
+                        <a href="{{ url('task.detail', args=[task.id]) }}" class="text-dark">
+                            <h5 class="card-title">{{ task.name }}</h5>
+                            <p class="card-text">{{ task.content }}</p>
+                        </a>
+                    </div>
+                    <div class="card-footer bg-transparent border-info">
+                        State: {% if task.is_done %}done.{% else %}in progress.{% endif %}
+                    </div>
+                </div>
+                <br><br>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

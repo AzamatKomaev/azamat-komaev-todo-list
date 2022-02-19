@@ -12,14 +12,13 @@
                     <p class="card-text">{{ task.content }}</p>
                 </div>
                 <div class="card-footer bg-transparent border-info">
-                    Состояние: {% if task.is_done %}сделано.{% else %}в процессе.{% endif %}
+                    State: {% if task.is_done %}done.{% else %}in progress.{% endif %}
                     {% if request.user == task.user and not task.is_done %}
-                        <button onclick="updateTask({{ task.user.id }})" class="btn btn-primary">
-                            Сделано
+                        <button onclick="updateTask({{ task.id }})" class="btn btn-primary">
+                            Done
                         </button>
                     {% endif %}
                 </div>
             </div>
      </div>
-    <script src="{{ static("js/taskService.js") }}"></script>
 {% endblock %}

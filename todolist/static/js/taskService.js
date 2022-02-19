@@ -25,6 +25,7 @@ const updateTask = (taskId) => {
         .then((response) => {
             if (response.data.status === 200) {
                 location.reload()
+                return ;
             }
             alert("some problem")
         })
@@ -33,3 +34,15 @@ const updateTask = (taskId) => {
             alert("You cant do it!!")
         })
 }
+
+const redirectToUserTasks = () => {
+    const userTasksInput = document.getElementById('task-user-input')
+
+    if (userTasksInput.value) {
+        window.location.href = `http://127.0.0.1:8000/tasks/?sort_type=filter_by_user&user_username=${userTasksInput.value}`
+        return ;
+    }
+    alert('The input cant be empty!')
+    return null;
+}
+

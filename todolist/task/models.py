@@ -16,6 +16,6 @@ class Task(models.Model):
 
     class Meta:
         db_table = 'tasks'
-        ordering = ('-updated_at',)
+        ordering = ('-created_at',)
         verbose_name = "Task"
         verbose_name_plural = "Tasks"

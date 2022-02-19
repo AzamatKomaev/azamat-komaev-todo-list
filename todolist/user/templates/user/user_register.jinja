@@ -1,0 +1,14 @@
+{% extends "task/index.jinja" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div>
+        <form action="" method="POST" class="container">
+            {% csrf_token %}
+            {{ form.as_p() }}
+            <button type="submit" class="btn btn-success">Register!</button>
+        </form>
+    </div>
+{% endblock %}
