@@ -1,0 +1,36 @@
+{% extends "task/index.jinja" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div>
+        <h2 align="center">Sign In</h2>
+        <br>
+        <form action="" method="POST" class="container card mb-3">
+            <div class="card-text col-11 col-sm-9 col-md-8" style="margin: 0 auto; padding: 25px">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" maxlength="100" class="form-control" name="username" id="username" placeholder="azamat">
+                </div>
+                <p>
+                    {% if form.errors.username %}{{ form.errors.username }}{% endif %}
+                </p>
+                <br>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" maxlength="128" class="form-control" name="password" id="password" placeholder="ur password">
+                </div>
+                <a href="{{ url('user.registration') }}">Dont have an account? The time to create it!!</a>
+                <p>
+                    {% if form.errors.password %}{{ form.errors.password }}{% endif %}
+                </p>
+
+                {% if form.errors.__all__ %}{{ form.errors.__all__ }}{% endif %}
+                <br>
+                <button type="submit" class="btn btn-success">Login!</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

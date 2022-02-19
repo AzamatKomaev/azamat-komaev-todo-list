@@ -35,6 +35,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'todolist.urls'
 
+LOGOUT_REDIRECT_URL = 'user.registration'
+
 TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
@@ -90,7 +92,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en-EN'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -108,16 +110,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGGING = {
-    'version': 1,
-    'formatters': {
-        'verbose': {
-            'format': '{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-}
+AUTH_USER_MODEL = 'user.User'
+
+LOGIN_REDIRECT_URL = 'task.list'

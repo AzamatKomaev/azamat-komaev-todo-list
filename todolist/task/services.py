@@ -1,9 +1,9 @@
 from typing import Optional
 
-from django.contrib.auth.models import User
 from django.db.models.query import QuerySet
 
 from .models import Task
+from user.models import User
 
 
 class TaskService:
@@ -28,7 +28,6 @@ class TaskService:
     @staticmethod
     def get_queryset(sort_type: str, user_username: Optional[int]) -> QuerySet[Task]:
         tasks: QuerySet[Task] = Task.objects.none()
-        print(sort_type, user_username)
 
         if sort_type == "created_at":
             tasks = Task.objects.all()

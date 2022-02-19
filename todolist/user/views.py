@@ -1,9 +1,10 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
 
 from .forms import UserRegistrationForm, UserLoginForm
+from .models import User
 
 
 class RegistrationView(View):
@@ -17,10 +18,24 @@ class RegistrationView(View):
     def post(self, request):
         self.form = UserRegistrationForm(request.POST)
         if self.form.is_valid():
-            user = User.objects.create_user(**self.form.cleaned_data)
+            User.objects.create_user(**self.form.cleaned_data)
             return redirect('task.list')
 
         return render(request, self.template_name, {'form': self.form})
+
+
+class CustomLoginView(LoginView):
+    template_name = 'user/user_login.jinja'
+
+"""
+class LoginView(View):
+    http_method_names = ('get', 'post', )
+    form = UserLoginForm
+    template_name = 'user/user_login.jinja'
+
+    def get(self, request):
+        return render(request, self.template_name, {'form': self.form})
+"""
 
 
 class NotFoundTemplateView(TemplateView):
